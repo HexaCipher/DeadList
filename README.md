@@ -35,7 +35,7 @@ DeadList bridges the gap between complex CLI forensic tools and modern UI/UX, or
 
 ```mermaid
 graph TD
-    User([Analyst]) -->|Upload Memory Dump (.raw, .mem)| API[FastAPI Backend]
+    User([Analyst]) -->|Upload Memory Dump| API[FastAPI Backend]
     
     subgraph Analysis Engine
         API -->|Launch Subprocesses| Vol3[Volatility 3]
