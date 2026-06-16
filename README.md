@@ -1,6 +1,6 @@
 <div align="center">
 
-# ☠ DeadList
+![DeadList Logo](assets/DeadList_Logo.png)
 
 **The process that's dead to the system. Found alive by DeadList.**
 

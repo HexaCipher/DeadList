@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { EyeOff, Wifi, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { EyeOff, Wifi, ShieldCheck, AlertTriangle, Bug } from 'lucide-react';
 import { getRiskLevelColor } from '../utils/scoring';
+import useAnalysisStore from '../store/analysisStore';
 
 export default function ThreatSummary({ analysis }) {
   const [animated, setAnimated] = useState(false);
@@ -9,6 +10,9 @@ export default function ThreatSummary({ analysis }) {
     const timer = setTimeout(() => setAnimated(true), 100);
     return () => clearTimeout(timer);
   }, []);
+
+  const processes = useAnalysisStore((s) => s.processes);
+  const suspiciousCount = processes.filter(p => p.suspicion_score >= 30).length;
 
   const cards = [
     {
@@ -21,13 +25,13 @@ export default function ThreatSummary({ analysis }) {
       description: 'DKOM-hidden from Task Manager',
     },
     {
-      icon: AlertTriangle,
-      label: 'SUSPICIOUS CONNECTIONS',
-      value: analysis?.suspicious_connection_count || 0,
+      icon: Bug,
+      label: 'SUSPICIOUS PROCESSES',
+      value: suspiciousCount,
       color: '#D29922',
       bgColor: 'bg-suspicious-bg',
-      glow: analysis?.suspicious_connection_count > 0 ? 'shadow-glow-amber' : '',
-      description: 'On known malicious ports',
+      glow: suspiciousCount > 0 ? 'shadow-glow-amber' : '',
+      description: 'Processes with score ≥ 30',
     },
     {
       icon: ShieldCheck,
