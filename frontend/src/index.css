@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ──────────────────────────────── */
+:root {
+  --bg-base:         #0A0E13;
+  --bg-surface:      #161B22;
+  --bg-elevated:     #21262D;
+  --border-subtle:   #30363D;
+  --text-primary:    #E6EDF3;
+  --text-secondary:  #8B949E;
+  --text-disabled:   #484F58;
+  --accent-green:    #3FB950;
+  --accent-amber:    #D29922;
+  --accent-red:      #F85149;
+  --accent-blue:     #58A6FF;
+  --brand-primary:   #1F6FEB;
+  --glow-red:        rgba(248, 81, 73, 0.15);
+  --glow-green:      rgba(63, 185, 80, 0.10);
+}
+
+/* ─── Base Styles ────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-disabled);
+}
+
+/* ─── Selection ──────────────────────────────────────────── */
+::selection {
+  background-color: rgba(31, 111, 235, 0.3);
+  color: var(--text-primary);
+}
+
+/* ─── Custom Component Styles ────────────────────────────── */
+@layer components {
+  /* Status badges */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-bold uppercase tracking-wider rounded-badge;
+  }
+  
+  .badge-critical {
+    @apply badge;
+    background-color: #3D0B09;
+    color: #F85149;
+  }
+  
+  .badge-suspicious {
+    @apply badge;
+    background-color: #2D1C00;
+    color: #D29922;
+  }
+  
+  .badge-anomalous {
+    @apply badge;
+    background-color: #0D1F38;
+    color: #58A6FF;
+  }
+  
+  .badge-clean {
+    @apply badge;
+    background-color: #0D1F14;
+    color: #3FB950;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-bg-surface border border-border-subtle rounded-card p-5;
+  }
+
+  .card-elevated {
+    @apply bg-bg-elevated border border-border-subtle rounded-card p-5;
+  }
+
+  /* Table row hover */
+  .table-row-hover {
+    @apply transition-colors duration-150 cursor-pointer;
+  }
+  
+  .table-row-hover:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Terminal text */
+  .terminal-text {
+    @apply font-mono text-sm text-accent-green;
+  }
+
+  .terminal-alert {
+    @apply font-mono text-sm text-accent-red font-bold;
+  }
+
+  /* Glow effects */
+  .glow-red {
+    box-shadow: 0 0 20px rgba(248, 81, 73, 0.2);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 20px rgba(63, 185, 80, 0.15);
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 20px rgba(31, 111, 235, 0.25);
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes radar-scan {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ram-fill {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: var(--fill-percent, 0%);
+  }
+}
+
+@keyframes blink-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-radar {
+  animation: radar-scan 3s linear infinite;
+}
+
+.animate-ram-fill {
+  animation: ram-fill 2s ease-out forwards;
+}
+
+.animate-blink {
+  animation: blink-dot 1.5s ease-in-out infinite;
+}
+
+/* ─── Process Table Row Styles ───────────────────────────── */
+.process-row-hidden {
+  background-color: rgba(248, 81, 73, 0.08);
+  border-left: 3px solid #F85149;
+}
+
+.process-row-suspicious {
+  background-color: rgba(210, 153, 34, 0.08);
+  border-left: 3px solid #D29922;
+}
+
+.process-row-anomalous {
+  background-color: rgba(88, 166, 255, 0.08);
+  border-left: 3px solid #58A6FF;
+}
+
+.process-row-clean {
+  border-left: 3px solid transparent;
+}
+
+/* ─── Upload Drop Zone ───────────────────────────────────── */
+.dropzone-active {
+  border-color: var(--brand-primary) !important;
+  background-color: rgba(31, 111, 235, 0.05) !important;
+  box-shadow: 0 0 30px rgba(31, 111, 235, 0.15);
+}
+
+/* ─── Drawer Overlay ─────────────────────────────────────── */
+.drawer-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
