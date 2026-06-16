@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/DeadList_Logo.png" alt="DeadList Logo" width="250" />
+<img src="assets/DeadList_Logo.png" alt="DeadList Logo" width="150" />
 
 **The process that's dead to the system. Found alive by DeadList.**
 
